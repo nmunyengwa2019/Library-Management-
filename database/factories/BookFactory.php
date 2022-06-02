@@ -3,7 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Carbon\Carbon;
+use App\Models\Author;
 class BookFactory extends Factory
 {
     /**
@@ -15,8 +16,10 @@ class BookFactory extends Factory
     {
         return [
             "name"=>$this->faker->name,
-            "published_at"=>$this->faker->sentence,
-            "author_id"=>$this->faker->sentence
+            "published_at"=>new Carbon(),
+            "author_id"=> function(){
+                return Author::factory()->create()->id;
+            }
         ];
     }
 }

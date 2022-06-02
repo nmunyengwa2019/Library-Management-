@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\view\Middleware\ShareErrorsFromSession;
 use Illuminate\Http\Request;
-use App\Models\Book;
-use Carbon\Carbon;
+use App\Models\Author;
 
-class BooksController extends Controller
+class AuthorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +14,9 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books=Book::all();
-        $total=$books->count()?$books->count():0;
-        return view('books/index',compact(['books','total']
-    ));
+        $authors=Author::all();
+        
+        return view('authors/index',compact('authors'));
     }
 
     /**
@@ -29,8 +26,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        $now =new Carbon();
-        return view('books/create',compact('now'));
+        
     }
 
     /**
@@ -41,13 +37,14 @@ class BooksController extends Controller
      */
     public function store()
     {
-        $attributes= request()->validate([
-                "name"=>"required",
-                "author_id"=>"required",
-                "published_at"=>"required",
-            ]);
-        Book::firstOrCreate($attributes);
-        return redirect('books');
+        $attributes = request()->validate([
+            'name'=>'required',
+            'dob'=>'required'
+        ]);
+
+        Author::create($attributes);
+        
+        return redirect('authors');
     }
 
     /**
@@ -79,16 +76,9 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Book $book)
+    public function update(Request $request, $id)
     {
-        $attributes= request()->validate([
-                "name"=>"required",
-                "author_id"=>"required",
-                "published_at"=>"required",
-            ]);
-        //dd($book->update($attributes));
-
-        $book->update($attributes);   
+        //
     }
 
     /**
@@ -97,10 +87,8 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        $book->delete();
+        //
     }
-
-    
 }

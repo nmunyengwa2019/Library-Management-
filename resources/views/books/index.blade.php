@@ -1,21 +1,23 @@
 @extends('layouts/app')
 
 @section('content')
-<div>
-	<div>
-		<h1>Books</h1>
-		<div>
-			<ul>
+<div class="container">
+	<div class="card">
+		<h1 class="card-header">Books [{{$total}}]</h1>
+		<div class="card-body">
+			<ol>
+			
+
 			@forelse($books as $book)
-			<li>
-				{{$book->name}}
-				<!-- <li>{{$book->author}}</li> -->
-				<li>{{$book->published_at}}</li>
+			<li class="card-body">
+				<h5>{{$book->name}} <span style="font-size: x-small;"></span></h5> published {{$book->published_at->format('d-m-Y')}}
 			</li>
+			<hr>
 			@empty
 			<h2>Library is empty</h2>
 			@endforelse
-			</ul>
+			
+		</ol>
 		</div>
 	</div>
 </div>

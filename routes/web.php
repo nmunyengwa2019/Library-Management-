@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BooksController;
+use App\Http\Controllers\AuthorsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,5 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/books','App\Http\Controllers\BooksController@store');
-Route::get('/books','App\Http\Controllers\BooksController@index');
+Route::group(['middleware'=>'auth'], function(){
+    Route::resources([
+    'books'=>BooksController::class,
+    'authors'=> AuthorsController::class
+]);
+});
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
