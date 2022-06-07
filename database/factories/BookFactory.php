@@ -17,9 +17,8 @@ class BookFactory extends Factory
         return [
             "name"=>$this->faker->name,
             "published_at"=>new Carbon(),
-            "author_id"=> function(){
-                return Author::factory()->create()->id;
-            }
+            "author_id"=>  Author::factory()
+            
         ];
     }
 }

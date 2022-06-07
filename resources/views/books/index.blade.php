@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 	<div class="card">
-		<h1 class="card-header">Books [{{$total}}]</h1>
+		<h1 class="card-header text-center">Books [{{$total}}]</h1>
 		<a href="{{ url('books/create')}}" style="text-align: center; margin-top: 15px;"> <input type="button" style="background-color: skyblue;" value="Add book "></a>
 		<div class="card-body">
 			<ol>

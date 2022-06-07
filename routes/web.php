@@ -28,6 +28,10 @@ Route::group(['middleware'=>'auth'], function(){
 ]);
 });
 
+Route::post('/checkout/{book}','App\Http\Controllers\BookCheckoutController@store')->middleware('auth');
+
+Route::post('/checkin/{book}','App\Http\Controllers\BookCheckinController@store')->middleware('auth');
+
 
 
 Auth::routes();
