@@ -16,4 +16,16 @@ class Author extends Model
     {
          $this->$attributes['dob'] = Carbon::createFromDate(config('app.date_format'),$dob)->format('dd-mm-yyyy');
     }
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
+
+    //  public function setAuthorIdAttributes($author)
+    // {
+    //     $this->$attributes['author_id'] = Author::firstOrCreate([
+    //         'name'=>$author
+    //     ])->id; 
+    // }
 }

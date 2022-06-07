@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\view\Middleware\ShareErrorsFromSession;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Author;
 use Carbon\Carbon;
 
 class BooksController extends Controller
@@ -47,6 +48,7 @@ class BooksController extends Controller
                 "published_at"=>"required",
             ]);
         Book::firstOrCreate($attributes);
+        Author::firstOrCreate(['name'=>$attributes['author_id']]);
         return redirect('books');
     }
 
@@ -56,9 +58,10 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
-        //
+
+        return view('books/show',compact('book'));
     }
 
     /**
@@ -67,9 +70,10 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
-        //
+        $now =new Carbon();
+        return view('books/edit',compact(['book','now']));
     }
 
     /**
@@ -88,7 +92,8 @@ class BooksController extends Controller
             ]);
         //dd($book->update($attributes));
 
-        $book->update($attributes);   
+        $book->update($attributes);
+        return redirect($book->path());   
     }
 
     /**

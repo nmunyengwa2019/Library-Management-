@@ -15,4 +15,7 @@ class BookTest extends TestCase
         $book = Book::factory()->create();
         $this->assertEquals($book->path(),'/books/'.$book->id);
     }
+
+  
+
 }

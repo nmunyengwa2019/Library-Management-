@@ -9,7 +9,7 @@
 		<h4>
 		<li >
 			
-			{{ $author->name }}	&rarr;  born {{ $author->dob->format('d-m-Y')  }}		
+			{{ $author->name }}	 {{ $author->dob?$author->dob->format('d-m-Y'):''  }}		
 		</li>
 		</h4>
 		@empty

@@ -37,12 +37,12 @@ class AuthorsController extends Controller
      */
     public function store()
     {
-        $attributes = request()->validate([
+        $attributes = request()->only([
             'name'=>'required',
             'dob'=>'required'
         ]);
 
-        Author::create($attributes);
+        Author::firstOrCreate($attributes);
         
         return redirect('authors');
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\AuthorsController;
+//use App\Http\Controllers\ImportsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/imports','App\Http\Controllers\ImportsController@store')->middleware('auth');
 Route::group(['middleware'=>'auth'], function(){
     Route::resources([
     'books'=>BooksController::class,

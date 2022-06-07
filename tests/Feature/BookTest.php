@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Book;
+use App\Models\Author;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -72,6 +73,8 @@ class BookTest extends TestCase
          $this->assertInstanceOf(Carbon::class, $book->published_at);
         //line below required when formatting dates
         $this->assertEquals('1999-05-20', $book->published_at->format('Y-m-d'));
+
+        $this->get($book->path().'/edit')->assertStatus(200);
         
         $this->patch($book->path(),['name'=>'nola','author_id'=>2,'published_at'=>'2000-04-01']);
         $books=Book::first();
@@ -82,6 +85,30 @@ class BookTest extends TestCase
         $this->assertEquals(2,Book::first()->author_id); 
         $this->assertEquals('2000-04-01',Book::first()->published_at->format('Y-m-d'));
 
+    }
+
+    /**
+     * @test
+     * */
+    public function an_author_is_automatically_created(){
+        $this->withoutExceptionHandling();
+        $this->actingAs(User::factory()->create());
+
+        $attributes = [
+            "name"=>"Titanic",
+            "author_id"=>1,
+            "published_at"=>"20-05-1999"
+            ];
+
+        $this->post('/books',$attributes);
+        $book = Book::all();
+        $author = Author::all();
+        $this->assertCount(1,Author::all());
+        $this->assertEquals($author->first()->id,$book->first()->id);
+
+        $this->assertInstanceOf(Carbon::class, $book->first()->published_at);
+        //line below required when formatting dates
+        $this->assertEquals('20-05-1999', $book->first()->published_at->format('d-m-Y'));    
     }
 
 
