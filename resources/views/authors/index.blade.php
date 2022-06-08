@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<h1 class="card-header">Authors</h1>
+	<h1 class="card-header text-center"><span style="font-size:22px;"><a href="{{url('/books')}} " style="text-decoration: none;">&larr;books</a></span> Authors</h1>
 	<div class="card-body">
 		
 		@forelse($authors as $author)

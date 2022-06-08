@@ -21,6 +21,7 @@
 		</div>
 		<div>
 			<button type="submit" class="btn">Submit</button>
+			<a href="{{url('/books')}}"><input type="button" value="Cancel"></a>
 		</div>
 		</form>
 

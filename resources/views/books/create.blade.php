@@ -4,7 +4,10 @@
 @section('content')
 <div class="container">
 	<div class="card">
-		<h1 class="card-header text-center">Add Book</h1>
+		<h1 class="card-header text-center">
+			<a href="{{url('books')}}" style="margin: 20px; text-decoration: none;">
+				<span style="font-size:22px;">&larr;books </span></a> Add Book
+			</h1>
 	</div>
 	@if($errors->any())
 	<div class="alert alert-danger">
@@ -42,7 +45,7 @@
 				<button type="submit" style="margin: 10px;" class="btn btn-outline-primary">Upload Data</button>
 			</form>
 		</div>
-		<a href="{{url('books')}}" style="margin: 20px; "><input style="margin: 10px;" type="button" btn btn-outline-primary value="&larr;Books"></a>
+		
 	</div>
 </div>
 

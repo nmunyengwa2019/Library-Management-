@@ -32,6 +32,8 @@ Route::post('/checkout/{book}','App\Http\Controllers\BookCheckoutController@stor
 
 Route::post('/checkin/{book}','App\Http\Controllers\BookCheckinController@store')->middleware('auth');
 
+Route::get('/checkedout/books','App\Http\Controllers\BookCheckoutController@index')->middleware('auth');
+
 
 
 Auth::routes();

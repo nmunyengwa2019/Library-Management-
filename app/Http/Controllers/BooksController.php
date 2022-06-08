@@ -19,6 +19,7 @@ class BooksController extends Controller
     {
         $books=Book::all();
         $total=$books->count()?$books->count():0;
+        
         return view('books/index',compact(['books','total']
     ));
     }
@@ -105,6 +106,7 @@ class BooksController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
+        return redirect('/books');
     }
 
     
